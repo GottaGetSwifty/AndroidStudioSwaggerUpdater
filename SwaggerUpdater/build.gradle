@@ -1,0 +1,26 @@
+project(':SwaggerUpdater') {
+    apply plugin: 'application'
+    apply plugin: 'java'
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+
+
+    mainClassName = "updater.SwaggerUpdater"
+    def downloadUrl = "PUT_URL_HERE"
+    // edit output direction
+    def outputDir = "../app/src/main/java"
+
+    dependencies {
+        compile fileTree(dir: 'libs', include: ['*.jar'])
+        compile 'com.squareup.okhttp3:okhttp:3.2.0'
+    }
+
+    task createDocs {
+        def docs = file(outputDir)
+        docs.mkdirs()
+    }
+
+    run {
+        args outputDir, downloadUrl
+    }
+}
